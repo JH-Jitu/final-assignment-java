@@ -90,7 +90,7 @@ label {
 <div class="login-container">
     <h3>Login</h3>
 
-    <form action="${pageContext.request.contextPath}/login" method="post">
+    <form action="tax" method="post">
 
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>

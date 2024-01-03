@@ -59,7 +59,7 @@ public class User {
 
 
     @NotBlank
-//    @Min(5)
+    @Min(5)
     private String password;
 
     private Double tax;

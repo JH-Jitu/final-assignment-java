@@ -27,10 +27,6 @@ public class UserService {
         userRepository.edit(user);
     }
 
-    public void deleteUser(int id) {
-        userRepository.delete(id);
-    }
-
     public List<User> getAllUsers() {
         return userRepository.getAll();
     }
@@ -39,12 +35,16 @@ public class UserService {
         return userRepository.get(id);
     }
 
-    public String getFullNameByUsername(String username) {
-        Optional<User> userOptional = userRepository.findByUsername(username);
-        return userOptional.map(User::getFullName).orElse(null);
+    public User authenticateUser(String username, String password) {
+        // Retrieve user by username from the database
+        User user = userRepository.findByUsername(username);
+
+        // Check if the user exists and the passwords match (insecure)
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        } else {
+            return null;
+        }
     }
 
-    public boolean authenticateUser(String username, String password) {
-        return userRepository.findByUsernameAndPassword(username, password) != null;
-    }
 }

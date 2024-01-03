@@ -3,12 +3,11 @@ package dev.repository;
 import dev.domain.Income;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
+@Transactional
 @Repository
 public class IncomeRepository {
 
@@ -18,30 +17,8 @@ public class IncomeRepository {
         this.sessionFactory = sessionFactory;
     }
 
-    public void create(Income income) {
+    public void save(Income income) {
         Session session = sessionFactory.getCurrentSession();
         session.save(income);
-    }
-
-    public void edit(Income income) {
-        Session session = sessionFactory.getCurrentSession();
-        session.update(income);
-    }
-
-    public void delete(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        Income income = get(id);
-        session.delete(income);
-    }
-
-    public List<Income> getAll() {
-        Session session = sessionFactory.getCurrentSession();
-        Query<Income> incomeQuery = session.createQuery("FROM Income", Income.class);
-        return incomeQuery.getResultList();
-    }
-
-    public Income get(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        return session.get(Income.class, id);
     }
 }

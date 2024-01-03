@@ -28,11 +28,6 @@ public class UserRepository {
         session.update(user);
     }
 
-    public void delete(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        User user = get(id);
-        session.delete(user);
-    }
 
     public List<User> getAll() {
         Session session = sessionFactory.getCurrentSession();
@@ -45,19 +40,12 @@ public class UserRepository {
         return session.get(User.class, id);
     }
 
-    public Optional<User> findByUsername(String username) {
-        try (Session session = sessionFactory.openSession()) {
-            Query<User> query = session.createQuery("FROM User WHERE username = :username", User.class);
-            query.setParameter("username", username);
-            return Optional.ofNullable(query.uniqueResult());
-        }
+    public User findByUsername(String username) {
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "FROM User WHERE username = :username";
+        Query<User> query = session.createQuery(hql, User.class);
+        query.setParameter("username", username);
+        return query.uniqueResult();
     }
 
-    public User findByUsernameAndPassword(String username, String password) {
-        Session session = sessionFactory.getCurrentSession();
-            return session.createQuery("FROM User WHERE username = :username AND password = :password", User.class)
-                    .setParameter("username", username)
-                    .setParameter("password", password)
-                    .uniqueResult();
-    }
 }

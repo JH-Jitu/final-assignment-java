@@ -20,33 +20,33 @@ public class Income {
 
     @NotNull
     @Column(name = "basic_pay")
-    private Double basicPay;
+    private int basicPay;
 
     @NotNull
     @Column(name = "house_rent_allowance")
-    private Double houseRentAllowance;
+    private int houseRentAllowance;
 
     @NotNull
     @Column(name = "conveyance_allowance")
-    private Double conveyanceAllowance;
+    private int conveyanceAllowance;
 
     @NotNull
     @Column(name = "medical_allowance")
-    private Double medicalAllowance;
+    private int medicalAllowance;
 
     @NotNull
     @Column(name = "other_allowance")
-    private Double otherAllowance;
+    private int otherAllowance;
 
     @NotNull
     @Column(name = "deduction_amount")
-    private Double deductionAmount;
+    private int deductionAmount;
 
     @Column(name = "tax")
-    private Double tax;
+    private double tax;
 
-    public Income(int id, String username, Double basicPay, Double houseRentAllowance,
-                  Double conveyanceAllowance, Double medicalAllowance, Double otherAllowance, Double deductionAmount) {
+    public Income(int id, String username, int basicPay, int houseRentAllowance,
+                  int conveyanceAllowance, int medicalAllowance, int otherAllowance, int deductionAmount, double tax) {
         this.id = id;
         this.username = username;
         this.basicPay = basicPay;
@@ -56,9 +56,7 @@ public class Income {
         this.otherAllowance = otherAllowance;
         this.deductionAmount = deductionAmount;
         this.tax = tax;
-
     }
-
 
     public Income() {
     }
@@ -79,59 +77,59 @@ public class Income {
         this.username = username;
     }
 
-    public Double getBasicPay() {
+    public int getBasicPay() {
         return basicPay;
     }
 
-    public void setBasicPay(Double basicPay) {
+    public void setBasicPay(int basicPay) {
         this.basicPay = basicPay;
     }
 
-    public Double getHouseRentAllowance() {
+    public int getHouseRentAllowance() {
         return houseRentAllowance;
     }
 
-    public void setHouseRentAllowance(Double houseRentAllowance) {
+    public void setHouseRentAllowance(int houseRentAllowance) {
         this.houseRentAllowance = houseRentAllowance;
     }
 
-    public Double getConveyanceAllowance() {
+    public int getConveyanceAllowance() {
         return conveyanceAllowance;
     }
 
-    public void setConveyanceAllowance(Double conveyanceAllowance) {
+    public void setConveyanceAllowance(int conveyanceAllowance) {
         this.conveyanceAllowance = conveyanceAllowance;
     }
 
-    public Double getMedicalAllowance() {
+    public int getMedicalAllowance() {
         return medicalAllowance;
     }
 
-    public void setMedicalAllowance(Double medicalAllowance) {
+    public void setMedicalAllowance(int medicalAllowance) {
         this.medicalAllowance = medicalAllowance;
     }
 
-    public Double getOtherAllowance() {
+    public int getOtherAllowance() {
         return otherAllowance;
     }
 
-    public void setOtherAllowance(Double otherAllowance) {
+    public void setOtherAllowance(int otherAllowance) {
         this.otherAllowance = otherAllowance;
     }
 
-    public Double getDeductionAmount() {
+    public int getDeductionAmount() {
         return deductionAmount;
     }
 
-    public void setDeductionAmount(Double deductionAmount) {
+    public void setDeductionAmount(int deductionAmount) {
         this.deductionAmount = deductionAmount;
     }
 
-    public Double getTax() {
+    public double getTax() {
         return tax;
     }
 
-    public void setTax(Double tax) {
+    public void setTax(double tax) {
         this.tax = tax;
     }
 }

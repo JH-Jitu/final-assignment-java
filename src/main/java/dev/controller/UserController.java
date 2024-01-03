@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -59,44 +60,23 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable int id) {
-        userService.deleteUser(id);
-        return "redirect:/users";
-    }
-
     @GetMapping("/login")
-    public String loginForm(Model model) {
-        model.addAttribute("user", new User());
+    public String showLoginForm(Model model) {
+        model.addAttribute("user", new User()); // Assuming User is your user model
         return "login";
     }
 
     @PostMapping("/login")
-    public String loginUser(@ModelAttribute User user, Model model) {
-
-        boolean isAuthenticated = userService.authenticateUser(user.getUsername(), user.getPassword());
-
-        if (isAuthenticated) {
-            String fullName = userService.getFullNameByUsername(user.getUsername());
-
-            User userFromDatabase = new User();
-            userFromDatabase.setFullName(fullName);
-
-            model.addAttribute("user", userFromDatabase);
-            return "home";
+    public String login(@RequestParam String username, @RequestParam String password, HttpSession session) {
+        User user = userService.authenticateUser(username, password);
+        if (user != null) {
+            session.setAttribute("loggedInUser", user);
+            return "redirect:/tax";
         } else {
-            return "redirect:/login?error";
+            return "login";
         }
     }
 
-    @GetMapping("/home")
-    public String home(Model model) {
-        // Assuming you have a user object with the required data
-        String user = userService.getFullNameByUsername("username"); // Replace with the actual username
-
-        model.addAttribute("user", user);
-        return "home";
-    }
 
 
 }
